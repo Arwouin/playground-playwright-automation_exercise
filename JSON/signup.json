@@ -1,0 +1,18 @@
+{
+    "Valid_SignUp": {
+        "password": "thisisapassword",
+        "first_name": "thisisafirstname",
+        "last_name": "thisisalastname",
+        "company": "thisisacompany",
+        "adress": "thisisaadress",
+        "state": "thisisastate",
+        "city": "thisisacity",
+        "zipcode": "11223",
+        "mobile_number": "111-222-333"
+    },
+
+    "Login_User": {
+        "email": "arwouin@gmail.com",
+        "password": "aB6F53vZtfGiLdoq"
+    }
+}
