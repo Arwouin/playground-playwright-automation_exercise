@@ -69,6 +69,5 @@ class CartPage extends BasePage {
 module.exports = { CartPage } 
 
 
-// Achat d'un produit seul et paiement de celui-ci
-// Achat de deux produts
+// Achat de deux products
 // Ajout de deux produits au panier, en supprimer un et vérifier celle-ci 
