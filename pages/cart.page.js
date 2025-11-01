@@ -37,6 +37,10 @@ class CartPage extends BasePage {
         };
     };
 
+    async shopContinue() {
+        await this.continueShop.click();
+    };
+
     async verifyCount(expectCount) {
         await expect(this.products).toHaveCount(expectCount);
     };
@@ -67,7 +71,3 @@ class CartPage extends BasePage {
     };
 };
 module.exports = { CartPage } 
-
-
-// Achat de deux products
-// Ajout de deux produits au panier, en supprimer un et vérifier celle-ci 

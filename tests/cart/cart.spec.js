@@ -12,7 +12,7 @@ test.describe("Tests fonctionnels - Panier, achats", () => {
         cartPage = new CartPage(page);
     });
 
-    test('E2E achat produit', async ({ page }) => {
+    test('E2E achat produit', async () => {
         test.setTimeout(100000);
         await cartPage.addProductCart(1);
         await cartPage.goToCart();
@@ -27,4 +27,15 @@ test.describe("Tests fonctionnels - Panier, achats", () => {
             purchaseJson.Valid_Card.ExpirationYear
         );
     });
+
+    test.only('Achat de deux produits et vérifications', async ({ page }) => {
+        await cartPage.addProductCart(1);
+        await cartPage.shopContinue();
+        await cartPage.addProductCart(2);
+        await cartPage.goToCart();
+        await cartPage.verifyCount(2);
+    });
 });
+
+// Achat de deux products
+// Ajout de deux produits au panier, en supprimer un et vérifier celle-ci 
