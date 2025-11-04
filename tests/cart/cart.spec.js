@@ -1,5 +1,5 @@
 const { CartPage } = require('../../pages/cart.page');
-const purchaseJson = require('../../JSON/purchaseCard.json');
+const { PurchaseCard } = require('../../utils/cardHelp');
 const { test, expect } = require('@playwright/test');
 const { createLog } = require('../../utils/authHelp');
 
@@ -18,24 +18,29 @@ test.describe("Tests fonctionnels - Panier, achats", () => {
         await cartPage.goToCart();
         await cartPage.verifyCount(1);
         await cartPage.clickOnCheckout();
-        await cartPage.verifyProduct("Blue Top", "500", "500");
-        await cartPage.payment(
-            purchaseJson.Valid_Card.name,
-            purchaseJson.Valid_Card.numberCard,
-            purchaseJson.Valid_Card.CVC,
-            purchaseJson.Valid_Card.ExpirationMonth,
-            purchaseJson.Valid_Card.ExpirationYear
-        );
+        await cartPage.verifyProduct("Blue Top", "500", "500", "0");
+        await PurchaseCard(page);
     });
 
-    test.only('Achat de deux produits et vérifications', async ({ page }) => {
+    test('Achat de deux produits et vérifications', async ({ page }) => {
         await cartPage.addProductCart(1);
         await cartPage.shopContinue();
         await cartPage.addProductCart(2);
         await cartPage.goToCart();
         await cartPage.verifyCount(2);
+        await cartPage.clickOnCheckout();
+        await cartPage.verifyProduct("Blue Top", "500", "500", "0");
+        await cartPage.verifyProduct("Men Tshirt", "400", "400", "1");
+        await PurchaseCard(page);
+    });
+
+    test("Ajout de deux produits au panier, suppression et vérifications", async ({ page }) => {
+        await cartPage.addProductCart(1);
+        await cartPage.shopContinue();
+        await cartPage.addProductCart(3);
+        await cartPage.goToCart();
+        await cartPage.verifyCount(2);
+        await cartPage.deleteItem(0);
+        await cartPage.verifyCount(1);
     });
 });
-
-// Achat de deux products
-// Ajout de deux produits au panier, en supprimer un et vérifier celle-ci 

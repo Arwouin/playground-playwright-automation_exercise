@@ -27,7 +27,11 @@ async function createLog(page) {
         users.Valid_SignUp.mobile_number
     );
 
-    await page.getByRole('link', { name: "Continue" }).click();
+    const continueButton = page.getByRole('link', { name: "Continue" });
+
+    if (await continueButton.isVisible({ timeout: 2000 }).catch(() => false)) {
+        await continueButton.click();
+    }
 
     return newUser;
 }

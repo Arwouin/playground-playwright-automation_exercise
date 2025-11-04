@@ -11,7 +11,7 @@ class CartPage extends BasePage {
         this.checkout = page.locator('a.check_out');
         this.nameVerify = page.locator('.cart_description a');
         this.priceVerify = page.locator('.cart_price p');
-        this.TotalAmount = page.locator('.cart_total_price').nth(0);
+        this.TotalAmount = page.locator('.cart_total_price');
 
         this.placeOrder = page.getByRole('link', { name: "Place Order" });
 
@@ -22,6 +22,8 @@ class CartPage extends BasePage {
         this.expYear = page.locator('[data-qa="expiry-year"]');
         this.payButton = page.locator('[data-qa="pay-button"]');
         this.confirmation = page.locator('[data-qa="order-placed"]');
+
+        this.deleteProduct = page.locator('.cart_quantity_delete');
     };
 
     async addProductCart(index) {
@@ -51,10 +53,14 @@ class CartPage extends BasePage {
         await this.checkout.click();
     };
 
-    async verifyProduct(name, price, totalamount) {
-        await expect(this.nameVerify).toContainText(name);
-        await expect(this.priceVerify).toContainText(price);
-        await expect(this.TotalAmount).toContainText(totalamount);
+    async deleteItem(index) {
+        await this.deleteProduct.nth(index).click();;
+    };
+
+    async verifyProduct(name, price, totalamount, index) {
+        await expect(this.nameVerify.nth(index)).toContainText(name);
+        await expect(this.priceVerify.nth(index)).toContainText(price);
+        await expect(this.TotalAmount.nth(index)).toContainText(totalamount);
     };
 
     async payment(cardName, cardNumber, cvc, expMonth, expYear) {
