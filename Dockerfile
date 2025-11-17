@@ -12,4 +12,4 @@ RUN npx playwright install --with-deps
 
 RUN ls -R 
 
-CMD ["npx", "playwright", "test", "--reporter=dot", "--reporter=html"]
+CMD ["npx", "playwright", "test", "--reporter=html", "--reporter=dot"]
