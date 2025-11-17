@@ -6,13 +6,13 @@ const { createLog } = require('../../utils/authHelp');
 test.describe("Tests fonctionnels - Panier, achats", () => {
     let cartPage;
 
-    test.beforeEach(async ({ page }) => {
-        test.setTimeout(120000);
+    test.beforeEach(async ({ page }, testInfo) => {
+        testInfo.setTimeout(120000);
         await createLog(page);
         cartPage = new CartPage(page);
     });
 
-    test('E2E achat produit', async () => {
+    test('E2E achat produit', async ({ page }) => {
         test.setTimeout(100000);
         await cartPage.addProductCart(1);
         await cartPage.goToCart();

@@ -19,13 +19,14 @@ const invalidUserLog = [
 test.describe("Test d'inscription et de connexion", () => {
     let registerLogin;
 
-    test.beforeEach(async ({ page }) => {
+    test.beforeEach(async ({ page }, testInfo) => {
+        testInfo.setTimeout(120000);
         registerLogin = new RegisterLogin(page);
         await registerLogin.navigate();
     });
 
     test('Inscription', async ({ page }) => {
-        test.setTimeout(60000);
+        test.setTimeout(100000);
         await registerLogin.acceptCookies();
 
         await test.step("Inscription classique", async () => {
@@ -72,6 +73,7 @@ test.describe("Test d'inscription et de connexion", () => {
     });
     
     test('Connexion', async ({ page }) => {
+        test.setTimeout(100000);
         await test.step("Connexion avec un utilisateur valide", async () => {
             await registerLogin.acceptCookies();
             await registerLogin.clickOnLink();

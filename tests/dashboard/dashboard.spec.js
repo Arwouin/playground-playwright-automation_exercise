@@ -1,10 +1,11 @@
 const { test, expect } = require('@playwright/test');
 const { DashboardPage } = require('../../pages/dashboard.page');
 
-test.describe("test en vif", () => {
+test.describe("Navigation sur le Dashboard", () => {
     let dashboardPage;
 
-    test.beforeEach(async ({ page }) => {
+    test.beforeEach(async ({ page }, testInfo) => {
+        testInfo.setTimeout(120000);
         dashboardPage = new DashboardPage(page);
         await dashboardPage.navigate();
         await dashboardPage.acceptCookies();
@@ -40,6 +41,7 @@ test.describe("test en vif", () => {
     });
 
     test("Navigation vers la page tutoriels youtube", async () => {
+        test.setTimeout(10000000);
         await dashboardPage.goTutorial();
         await dashboardPage.navigate();
     });

@@ -128,13 +128,13 @@ class DashboardPage extends BasePage {
         await expect(this.products).toHaveCount(5);
     };
 
-    // Filters
     async filterWoman() {
         await this.woman.click();
         await this.dressW.click();
         await expect(this.products).toHaveCount(3);
     };
 
+    // Filters
     async filterMen() {
         await this.men.click();
     };

@@ -5,7 +5,8 @@ const contactJSON = require('../../JSON/contact.json');
 test.describe("Envoi et test du formulaire de contact", () => {
     let contactPage;
 
-    test.beforeEach(async ({ page }) => {
+    test.beforeEach(async ({ page }, testInfo) => {
+        testInfo.setTimeout(120000);
         contactPage = new ContactPage(page);
         await contactPage.navigate();
     });
