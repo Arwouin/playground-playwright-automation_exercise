@@ -30,6 +30,7 @@ class ContactPage extends BasePage {
             await this.file.setInputFiles(filePath);
         }
         await this.button.click();
+        await expect(this.success).toHaveText(/success/i, { timeout: 20000 });
         await expect(this.success).toBeVisible({ timeout: 10000 });
     };
 };
