@@ -1,0 +1,31 @@
+name: Playwright test on Automation Exercise
+
+on: [push, pull_request]
+
+jobs:
+    test:
+        timeout-minutes: 20
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+
+            - name: Clean Install Dep
+              run: npm ci
+
+            - name: Build Docker Image
+              run: docker build -t tests-playwright-autoexercise
+
+            - name: Run Docker Image
+              run: docker run --rm -v ${{ github.workspace }}/playwright-report:/app/playwright-report tests-playwright-autoexercise
+
+            - name: Upload report Playwright
+              uses: actions/upload-artifact@v4
+              with:
+                  name: report-playwright
+                  path: playwright-report/
